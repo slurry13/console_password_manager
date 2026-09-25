@@ -8,14 +8,14 @@ def get_connection():
     return db_con
 
 def init_db():
-    with get_connection():
-        db_cur = get_connection.db_con.cursor()
+    with get_connection() as con:
+        db_cur = con.cursor()
 
         db_cur.execute('''
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
-            salt TEXT NOT NULL,
+            sault TEXT NOT NULL,
             auth_verifier TEXT NOT NULL
         )
         ''')
@@ -32,15 +32,15 @@ def init_db():
 
         db_cur.close()
 
-def new_user(username: str, salt: str, auth_verifier: str):
+def new_user(username: str, sault: str, auth_verifier: str):
     try:
-        with get_connection():
-            db_cur = get_connection.db_con.cursor()
+        with get_connection() as con:
+            db_cur = con.cursor()
 
             db_cur.execute('''
                 INSERT INTO users (username, sault, auth_verifier)
                 VALUES (?, ?, ?)
-            '''), (username, salt, auth_verifier)
+            ''', (username, sault, auth_verifier))
 
             print(f"Sucs: User - {username} sucs made")
 
