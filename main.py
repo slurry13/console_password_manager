@@ -3,10 +3,11 @@ import crypto
 import session
 import getpass
 
+database.init_db()
+
 def registration():
-    print("New user reg")
-    new_username = print(f"Username: {input()}")
-    new_password = print(f"Password: {getpass(input())}")
+    new_username = input("Username: ")
+    new_password = getpass.getpass()
 
     u_salt = crypto.make_salt()
     fer_us = crypto.fernet(new_password, u_salt)
@@ -17,8 +18,12 @@ def registration():
 
     database.new_user(new_username, u_salt, a_verif)
 
-def login(username, password):
+def login():
+    username = print(f"Username: {input()}")
+    password = print(f"Password: {getpass(input())}")
 
+while(True):
+    cmd = input()
 
-
-#COMMANDS = {"reg" : registration, "log" : login}
+    if cmd == "reg":
+        registration()
