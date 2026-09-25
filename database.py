@@ -47,3 +47,6 @@ def new_user(username: str, salt: str, auth_verifier: str):
             db_cur.close()
     except sqlite3.IntegrityError:
         print(f"Err: User - {username} has already made")
+
+if __name__ == "__main__":
+    init_db()
