@@ -68,7 +68,7 @@ def get_passwords(user_id: int):
             db_cur = con.cursor()
 
             db_cur.execute('''
-                SELECT user_id, encrypted_url, encrypted_login, encrypted_password
+                SELECT id, encrypted_url, encrypted_login, encrypted_password
                 FROM passwords
                 WHERE user_id = ?
                 ''', (user_id,))

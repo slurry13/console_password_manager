@@ -63,9 +63,9 @@ def give_passwords():
 
     for rec_id, enc_url, enc_login, enc_pass in records:
         try:
-            url = current_session.fernet_user.decrypt(enc_url.encode('utf-8').decode('utf-8'))
-            log = current_session.fernet_user.decrypt(enc_login.encode('utf-8').decode('utf-8'))
-            passw = current_session.fernet_user.decrypt(enc_pass.encode('utf-8').decode('utf-8'))
+            url = current_session.fernet_user.decrypt(enc_url.encode('utf-8')).decode('utf-8')
+            log = current_session.fernet_user.decrypt(enc_login.encode('utf-8')).decode('utf-8')
+            passw = current_session.fernet_user.decrypt(enc_pass.encode('utf-8')).decode('utf-8')
 
             print(f"{rec_id:<4} | {url:<20} | {log:<20} | {passw:<20}")
         except Exception:
