@@ -35,7 +35,7 @@ def login():
         if decrypted_phrase == CHECK_PHRASE:
             print("Scs: Enter")
             current_session.user_id = id_us
-            current_session.fernet_user = username
+            current_session.fernet_user = fer_user
             current_session.is_active = True
 
         else:
@@ -44,6 +44,16 @@ def login():
     except Exception:
         print("Err: Anexpected master pass")
 
+def add_passwords():
+    new_service = input("URL/NAME: ")
+    new_login = input("Login: ")
+    new_password = getpass.getpass()
+
+    enc_url = current_session.fernet_user.encrypt(new_service.encode('utf-8')).decode('utf-8')
+    enc_login = current_session.fernet_user.encrypt(new_login.encode('utf-8')).decode('utf-8')
+    enc_pass = current_session.fernet_user.encrypt(new_password.encode('utf-8')).decode('utf-8')
+
+    database.add_password(current_session.user_id, enc_url, enc_login, enc_pass)
 
 while(True):
     cmd = input()
