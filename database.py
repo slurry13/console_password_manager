@@ -32,7 +32,6 @@ def init_db():
 
         db_cur.close()
 
-
 def new_user(username: str, salt: str, auth_verifier: str):
     try:
         with get_connection() as con:
@@ -48,6 +47,28 @@ def new_user(username: str, salt: str, auth_verifier: str):
             db_cur.close()
     except sqlite3.IntegrityError:
         print(f"Err: User - {username} has already made")
+
+def get_val(username: str):
+    try:
+        with get_connection() as con:
+            db_cur = con.cursor()
+
+            db_cur.execute('''
+                SELECT salt, auth_verifier, id
+                FROM users
+                WHERE username = ?
+            ''', (username,))
+
+            user_data = db_cur.fetchone()
+
+            db_cur.close()
+
+            if user_data:
+                return user_data[0], user_data[1], user_data[2]
+
+            print(f"Err: User - {username} doesnt exist")
+    except sqlite3.IntegrityError as e:
+        print(f"DB err: {e}")
 
 if __name__ == "__main__":
     init_db()
