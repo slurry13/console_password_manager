@@ -56,6 +56,8 @@ def add_passwords():
 
     database.add_password(current_session.user_id, enc_url, enc_login, enc_pass)
 
+    give_passwords()
+
 def give_passwords():
     records = database.get_passwords(current_session.user_id)
 
