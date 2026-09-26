@@ -48,7 +48,7 @@ def new_user(username: str, salt: str, auth_verifier: str):
     except sqlite3.IntegrityError:
         print(f"Err: User - {username} has already made")
 
-def add_password(user_id: str, encrypted_url: str, encrypted_login: str, encrypted_password: str):
+def add_password(user_id: int, encrypted_url: str, encrypted_login: str, encrypted_password: str):
     try:
         with get_connection() as con:
             db_cur = con.cursor()
