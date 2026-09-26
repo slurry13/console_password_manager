@@ -55,6 +55,25 @@ def add_passwords():
 
     database.add_password(current_session.user_id, enc_url, enc_login, enc_pass)
 
+def give_passwords():
+    records = database.get_passwords(current_session.user_id)
+
+    if not records:
+        print("Err: You dont have PWDs, to add one use - new")
+        return None
+
+    for rec_id, enc_url, enc_login, enc_pass in records:
+        try:
+            url = current_session.fernet_user.decrypt(enc_url.encode('utf-8').decode('utf-8'))
+            log = current_session.fernet_user.decrypt(enc_login.encode('utf-8').decode('utf-8'))
+            passw = current_session.fernet_user.decrypt(enc_pass.encode('utf-8').decode('utf-8'))
+
+            print(f"{rec_id:<4} | {url:<20} | {log:<20} | {passw:<20}")
+        except Exception:
+            print("Err: Decrypt values")
+
+
+
 while(True):
     cmd = input()
 
@@ -71,5 +90,7 @@ while(True):
         if cmd == "q":
             print("Scs: Quit")
             current_session.clear()
+        elif cmd == "new":
+            add_passwords()
         else:
             print(f"Unexpected cmd - {cmd}")
