@@ -37,6 +37,8 @@ def login():
             current_session.fernet_user = fer_user
             current_session.is_active = True
 
+            give_passwords()
+
         else:
             print("Err: Anexpected master pass")
 
