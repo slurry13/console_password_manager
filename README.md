@@ -1,7 +1,7 @@
-q - quit from user
-reg - reg new user
-log - login in your acc
-new - add new pass
+q - quit from user;
+reg - reg new user;
+log - login in your acc;
+new - add new pass;
 
 !WHEN YOU WRITTING YOU PASS YOU CANT SEE IT BECAUSE OF getpass.getpass(), CHECK YOU PASS BEFORE ADDING OR REGISTRTION!
 ALL PASS BECOME VISIBLE IN YOUR CONSOLE AFTER LOGIN IN ACCOUNT
