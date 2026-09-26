@@ -2,6 +2,8 @@ import database
 import crypto
 import session
 import getpass
+import secrets
+import string
 
 database.init_db()
 
@@ -54,7 +56,6 @@ def login():
             current_session.is_active = True
 
             give_passwords()
-
         else:
             print("Err: Anexpected master pass")
 
@@ -72,8 +73,6 @@ def add_passwords():
 
     database.add_password(current_session.user_id, enc_url, enc_login, enc_pass)
 
-    give_passwords()
-
 def give_passwords():
     records = database.get_passwords(current_session.user_id)
 
@@ -87,9 +86,30 @@ def give_passwords():
             log = current_session.fernet_user.decrypt(enc_login.encode('utf-8')).decode('utf-8')
             passw = current_session.fernet_user.decrypt(enc_pass.encode('utf-8')).decode('utf-8')
 
-            print(f"{url:<20} | {log:<20} | {passw:<20}")
+            print(f"{url:<40} | {log:<40} | {passw:<40}")
         except Exception:
             print("Err: Decrypt values")
+
+def password_generator():
+    password_length = int(input("Length: "))
+    
+    flag_special_symbols = input("Special symbols(0/1): ") == "1"
+    flag_numbers = input("Numbers(0/1): ") == "1"
+
+    password_alphabet = string.ascii_letters
+
+    if flag_numbers:
+        password_alphabet += string.digits
+
+    if flag_special_symbols:
+        password_alphabet += string.punctuation
+
+    generated_password = "".join(
+        secrets.choice(password_alphabet) for _ in range(password_length)
+    )
+
+    print(f"Your password: {generated_password}")
+
 
 
 
@@ -111,5 +131,9 @@ while(True):
             current_session.clear()
         elif cmd == "new":
             add_passwords()
+        elif cmd == "pwds":
+            give_passwords()
+        elif cmd == "gen":
+            password_generator()
         else:
             print(f"Unexpected cmd - {cmd}")
