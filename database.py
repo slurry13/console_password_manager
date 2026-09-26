@@ -48,6 +48,20 @@ def new_user(username: str, salt: str, auth_verifier: str):
     except sqlite3.IntegrityError:
         print(f"Err: User - {username} has already made")
 
+def add_password(user_id: str, encrypted_url: str, encrypted_login: str, encrypted_password: str):
+    try:
+        with get_connection() as con:
+            db_cur = con.cursor()
+
+            db_cur.execute('''
+                INSERT INTO passwords (user_id, encrypted_url, encrypted_login, encrypted_password)
+                VALUES(?, ?, ?, ?)
+            ''', (user_id, encrypted_url, encrypted_login, encrypted_password))
+
+            db_cur.close()
+    except Exception as e:
+        print(f"Err: {e}")
+
 def get_val(username: str):
     try:
         with get_connection() as con:
@@ -69,6 +83,8 @@ def get_val(username: str):
             print(f"Err: User - {username} doesnt exist")
     except sqlite3.IntegrityError as e:
         print(f"DB err: {e}")
+
+
 
 if __name__ == "__main__":
     init_db()
