@@ -2,7 +2,6 @@ import database
 import crypto
 import session
 import getpass
-from cryptography.fernet import Fernet
 
 database.init_db()
 
