@@ -8,6 +8,8 @@ database.init_db()
 
 CHECK_PHRASE = "hi_i_am_here"
 
+current_session = session.Session()
+
 def registration():
     new_username = input("Username: ")
     new_password = getpass.getpass()
@@ -17,8 +19,6 @@ def registration():
 
     enc_phrase = fer_us.encrypt(CHECK_PHRASE.encode('utf-8'))
     a_verif = enc_phrase.decode('utf-8')
-
-    print(a_verif)
 
     database.new_user(new_username, u_salt, a_verif)
 
@@ -34,9 +34,9 @@ def login():
 
         if decrypted_phrase == CHECK_PHRASE:
             print("Scs: Enter")
-            session.Session.user_id = id_us
-            session.Session.fernet_user = username
-            session.Session.is_active = True
+            current_session.user_id = id_us
+            current_session.fernet_user = username
+            current_session.is_active = True
 
         else:
             print("Err: Anexpected master pass")
@@ -48,7 +48,18 @@ def login():
 while(True):
     cmd = input()
 
-    if cmd == "reg":
-        registration()
-    elif cmd == "log":
-        login()
+    if not current_session.user_id:
+
+        if cmd == "reg":
+            registration()
+        elif cmd == "log":
+            login()
+        else:
+            print(f"Unexpected cmd - {cmd}")
+
+    else:
+        if cmd == "q":
+            print("Scs: Quit")
+            current_session.clear()
+        else:
+            print(f"Unexpected cmd - {cmd}")
