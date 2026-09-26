@@ -9,6 +9,22 @@ CHECK_PHRASE = "hi_i_am_here"
 
 current_session = session.Session()
 
+def print_banner():
+    banner = r"""
+  ██████╗██████╗ ███╗   ███╗
+ ██╔════╝██╔══██╗████╗ ████║
+ ██║     ██████╔╝██╔████╔██║
+ ██║     ██╔═══╝ ██║ ╚═╝ ██║
+ ╚██████╗██║     ██║     ██║
+  ╚═════╝╚═╝     ╚═╝     ╚═╝
+    """
+    print(banner)
+    print("=" * 30)
+    print("   Console Password Manager")
+    print("=" * 30 + "\n")
+
+print_banner()
+
 def registration():
     new_username = input("Username: ")
     new_password = getpass.getpass()
