@@ -11,6 +11,17 @@ CHECK_PHRASE = "hi_i_am_here"
 
 current_session = session.Session()
 
+def cmd_list():
+    print('''
+    q - quit from user;
+    reg - reg new user;
+    log - login in your acc;
+    new - add new pass;
+    pwds - show your passwords;
+    gen - generate passwords;
+    help - show all commands;
+    ''')
+
 def print_banner():
     banner = r"""
   ██████╗██████╗ ███╗   ███╗
@@ -135,5 +146,7 @@ while(True):
             give_passwords()
         elif cmd == "gen":
             password_generator()
+        elif cmd == "help":
+            cmd_list()
         else:
             print(f"Unexpected cmd - {cmd}")
