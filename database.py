@@ -62,7 +62,7 @@ def add_password(user_id: int, encrypted_url: str, encrypted_login: str, encrypt
     except Exception as e:
         print(f"Err: {e}")
 
-def get_password(user_id: int):
+def get_passwords(user_id: int):
     try:
         with get_connection() as con:
             db_cur = con.cursor()
