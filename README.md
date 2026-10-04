@@ -1,3 +1,5 @@
+LATEST - https://github.com/slurry13/console_password_manager/releases/tag/RELEASE
+
 q - quit from user;
 reg - reg new user;
 log - login in your acc;
