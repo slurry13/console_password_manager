@@ -2,7 +2,6 @@ import database
 import crypto
 import getpass
 import session
-import main
 import string
 import secrets
 
@@ -38,7 +37,7 @@ def login():
             current_session.fernet_user = fer_user
             current_session.is_active = True
 
-            main.give_passwords()
+            give_passwords()
         else:
             print("Err: Anexpected master pass")
 

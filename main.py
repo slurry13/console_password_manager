@@ -1,6 +1,9 @@
 import database
 import commands
 import shell
+import session
+
+current_session = session.Session()
 
 database.init_db()
 
@@ -10,7 +13,7 @@ shell.cmd_list()
 while(True):
     cmd = input()
 
-    if not commands.current_session.user_id:
+    if not current_session.user_id:
 
         if cmd == "reg":
             commands.registration()
@@ -22,7 +25,7 @@ while(True):
     else:
         if cmd == "q":
             print("Scs: Quit")
-            commands.current_session.clear()
+            current_session.clear()
         elif cmd == "new":
             commands.add_passwords()
         elif cmd == "pwds":
