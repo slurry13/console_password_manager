@@ -16,8 +16,7 @@ def print_banner():
  ██║     ██████╔╝██╔████╔██║
  ██║     ██╔═══╝ ██║ ╚═╝ ██║
  ╚██████╗██║     ██║     ██║
-  ╚═════╝╚═╝     ╚═╝     ╚═╝
-    """
+  ╚═════╝╚═╝     ╚═╝     ╚═╝"""
     print(banner)
     print("=" * 30)
     print("   Console Password Manager")
