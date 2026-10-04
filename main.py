@@ -1,13 +1,11 @@
 import database
 import commands
+import shell
 
 database.init_db()
 
-print_banner()
-
-
-
-
+shell.print_banner()
+shell.cmd_list()
 
 while(True):
     cmd = input()
@@ -32,6 +30,6 @@ while(True):
         elif cmd == "gen":
             commands.password_generator()
         elif cmd == "help":
-            cmd_list()
+            shell.cmd_list()
         else:
             print(f"Unexpected cmd - {cmd}")
