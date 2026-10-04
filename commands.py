@@ -3,6 +3,8 @@ import crypto
 import getpass
 import session
 import main
+import string
+import secrets
 
 current_session = session.Session()
 
